@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  redis:
+    image: "redis:alpine"
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/simple_login_register
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+    env_file:
+      - .env

@@ -1,0 +1,32 @@
+# Ignore development and local files
+.dockerignore
+.git
+.idea
+.vscode
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.egg-info/
+*.egg
+
+# Ignore media and static files
+media/
+static/
+venv/
+docs/
+screenshot.png
+
+# Ignore database files
+*.sqlite3
+*.db
+
+# Ignore log files
+*.log
+logs/
+*.swp
+
+# Ignore Docker-related files
+Dockerfile*
+docker-compose*
+.dockerignore
