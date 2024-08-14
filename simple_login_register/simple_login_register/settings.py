@@ -164,3 +164,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_PROFILE_MODULE = 'account.User'
+AUTH_USER_MODEL = 'account.User'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = "phone_number"
