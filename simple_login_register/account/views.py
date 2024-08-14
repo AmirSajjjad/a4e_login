@@ -1,13 +1,15 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from django.core.cache import cache
 from django.conf import settings
 from django.contrib.auth import authenticate
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import UpdateAPIView
 from random import randint
 
 
-from .serializers import CheckPhoneNumberRequestSerializer, TokenSerializer
+from .serializers import CheckPhoneNumberRequestSerializer, TokenSerializer, UpdateProfileSerializer
 from .models import User
 
 
@@ -118,3 +120,12 @@ class CheckOTPView(APIView):
         user = User.objects.get_or_create(phone_number=phone_number)
         password_serializer = TokenSerializer(data=get_tokens_for_user(user))
         return Response(password_serializer.data)
+
+
+class UpdateUserProfileView(UpdateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UpdateProfileSerializer
+    lookup_field = None
+    
+    def get_object(self):
+        return self.request.user
