@@ -168,3 +168,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_PROFILE_MODULE = 'account.User'
 AUTH_USER_MODEL = 'account.User'
 ACCOUNT_USER_MODEL_USERNAME_FIELD = "phone_number"
+
+MAX_USER_WARNING_COUNT = 3
+USER_LIMIT_TIME = 60

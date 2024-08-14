@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ('is_staff', models.BooleanField(default=False, help_text='Designates whether the user can log into this admin site.', verbose_name='staff status')),
                 ('is_active', models.BooleanField(default=True, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')),
                 ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
-                ('phone_number', models.CharField(error_messages={'unique': 'A user with that phone_number already exists.'}, help_text='Required. 25 characters or fewer. Letters, digits, and spaces only.', max_length=25, unique=True)),
+                ('phone_number', models.CharField(error_messages={'unique': 'A user with that phone_number already exists.'}, help_text='Required. 25 characters or fewer. Letters, digits, and spaces only.', max_length=15, unique=True)),
                 ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.group', verbose_name='groups')),
                 ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.permission', verbose_name='user permissions')),
             ],
