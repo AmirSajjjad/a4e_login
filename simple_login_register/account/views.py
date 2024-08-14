@@ -7,7 +7,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from random import randint
 
 
-from .serializers import CheckPhoneNumberRequestSerializer, CheckPasswordSerializer
+from .serializers import CheckPhoneNumberRequestSerializer, TokenSerializer
 from .models import User
 
 
@@ -49,6 +49,16 @@ def give_warning_to_user(phone_number):
         warning = 1
     cache.set(cache_key, warning, settings.USER_LIMIT_TIME)
 
+def check_OTP_code(phone_number, code):
+    cache_key = f"{phone_number}-OTP"
+    valid_otp_code = cache.get(cache_key)
+    if not valid_otp_code:
+        # TODO only warning to IP or use give_warning_to_user function?
+        raise "otp code not find"
+    if valid_otp_code != code:
+        give_warning_to_user(phone_number)
+        raise "invalid otp code"
+        
 
 class CheckPhoneNumberView(APIView):
     def get(self, request,*args, **kwargs):
@@ -87,8 +97,24 @@ class CheckPasswordView(APIView):
             give_warning_to_user(phone_number)
             raise "Invalid phone number or Password"
         
-        password_serializer = CheckPasswordSerializer(data=get_tokens_for_user(user))
+        password_serializer = TokenSerializer(data=get_tokens_for_user(user))
         return Response(password_serializer.data)
 
 
+class CheckOTPView(APIView):
+    def post(self, request, *args, **kwargs):
+        phone_number = kwargs.pop("phone_number", None)
+        code = kwargs.pop("code", None)
 
+        serializer = CheckPhoneNumberRequestSerializer(data={"phone_number": phone_number})
+        serializer.is_valid(raise_exception=True)
+
+        if check_user_is_limited(phone_number):
+            raise "User Is Limited"
+        
+        check_OTP_code(phone_number, code)
+
+        # Using get_or_create for create a new user or generate token for an existing user to reset password or ...
+        user = User.objects.get_or_create(phone_number=phone_number)
+        password_serializer = TokenSerializer(data=get_tokens_for_user(user))
+        return Response(password_serializer.data)

@@ -9,7 +9,7 @@ class CheckPhoneNumberRequestSerializer(serializers.Serializer):
     phone_number = serializers.CharField(max_length=15, validators=[phone_regex], required=True)
 
 
-class CheckPasswordSerializer(serializers.Serializer):
+class TokenSerializer(serializers.Serializer):
     access = serializers.CharField()
     refresh = serializers.CharField()    
 
