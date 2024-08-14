@@ -14,6 +14,12 @@ Check user phone number is exists or not
     - if user send correct OTP code, register user with first name, last name, email, password then give access token and refresh token to user
     - if user send incorrect OTP code, the user can try X times. If they cannot enter the correct code, the Phone Number and IP will be banned for Y minutes.
 
+### API Endpoints
+- `GET /account/login/check_phone_number` : check this phone number is exists or is new.
+- `POST /account/login/check_password` : check phone number and password then give access token and refresh token.
+- `POST /account/login/check_otp` : check otp code then give access token and refresh token.
+- `PATCH/PUT /account/profile/update`: update user profile data
+
 ## Installing
 
 ### Clone the project
