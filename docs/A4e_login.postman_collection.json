@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "1f9399b4-3177-4b99-b576-0dad418f97ff",
+		"name": "A4e_login",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "check phone number",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/account/login/check_phone_number?phone_number=+999999999",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"account",
+						"login",
+						"check_phone_number"
+					],
+					"query": [
+						{
+							"key": "phone_number",
+							"value": "+999999999"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "phone_number",
+							"value": "+999999999",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/account/login/check_password",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"account",
+						"login",
+						"check_password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check otp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "phone_number",
+							"value": "+999999999",
+							"type": "default"
+						},
+						{
+							"key": "code",
+							"value": "",
+							"description": "OTP code",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/account/login/check_otp",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"account",
+						"login",
+						"check_otp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "default"
+						},
+						{
+							"key": "first_name",
+							"value": "",
+							"type": "default"
+						},
+						{
+							"key": "last_name",
+							"value": "",
+							"type": "default"
+						},
+						{
+							"key": "email",
+							"value": "",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/account/profile/update",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"account",
+						"profile",
+						"update"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "127.0.0.1:8000",
+			"type": "default"
+		}
+	]
+}
