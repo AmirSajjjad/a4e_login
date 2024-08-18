@@ -19,7 +19,8 @@ class CheckPhoneNumberView(APIView):
     def get(self, request,*args, **kwargs):
         phone_number = self.request.query_params.get('phone_number')
 
-        serializer = CheckPhoneNumberRequestSerializer(data={"phone_number": phone_number})
+        serializer = CheckPhoneNumberRequestSerializer(
+            data={"phone_number": phone_number}, context={'request': self.request})
         serializer.is_valid(raise_exception=True)
 
         user_instance = User.objects.filter(phone_number__iexact=phone_number)
@@ -35,7 +36,8 @@ class CheckPasswordView(APIView):
         phone_number = request.data.get("phone_number")
         password = request.data.get("password")
 
-        serializer = CheckPhoneNumberRequestSerializer(data={"phone_number": phone_number})
+        serializer = CheckPhoneNumberRequestSerializer(
+            data={"phone_number": phone_number}, context={'request': self.request})
         serializer.is_valid(raise_exception=True)
         
         user = authenticate(request, phone_number=phone_number, password=password)
@@ -51,7 +53,8 @@ class CheckOTPView(APIView):
         phone_number = request.data.get("phone_number")
         code = request.data.get("code")
 
-        serializer = CheckPhoneNumberRequestSerializer(data={"phone_number": phone_number})
+        serializer = CheckPhoneNumberRequestSerializer(
+            data={"phone_number": phone_number}, context={'request': self.request})
         serializer.is_valid(raise_exception=True)
         
         check_OTP_code(phone_number, code)

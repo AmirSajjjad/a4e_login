@@ -5,7 +5,6 @@ from rest_framework.exceptions import ValidationError
 from random import randint
 
 def check_user_is_limited(phone_number):
-    # TODO check user IP 
     cache_key = phone_number + settings.CACHE_WARNING_KEY
     warning_count = cache.get(cache_key)
     if not warning_count:
@@ -32,7 +31,6 @@ def get_tokens_for_user(user):
     }
 
 def give_warning_to_user(phone_number):
-    # TODO warning to ip
     cache_key = phone_number + settings.CACHE_WARNING_KEY
     warning = cache.get(cache_key)
     if warning == None:

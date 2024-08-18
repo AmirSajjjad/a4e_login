@@ -39,9 +39,6 @@ class TestCheckPhoneNumber(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response_data['phone_number'], ['User Is Limited'])
 
-        # TODO: test ip limit:
-        # cache.delete(cache_key)
-
     def test_ok_user_exists(self):
         User.objects.create(phone_number=self.phone_number)
 

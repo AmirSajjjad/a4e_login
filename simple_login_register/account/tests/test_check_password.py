@@ -64,9 +64,6 @@ class TestCheckPassword(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response_data['phone_number'], ['User Is Limited'])
 
-        # TODO: test ip limit:
-        # cache.delete(cache_key)
-
     def test_ok(self):
         response = self.client.post(self.url, data={"phone_number": self.phone_number, "password": self.password})
         response_data = response.json()
