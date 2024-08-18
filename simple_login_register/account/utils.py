@@ -19,7 +19,7 @@ def send_otp_code(phone_number):
     cache_key = phone_number + settings.CACHE_OTP_KEY
     if cache.get(cache_key):
         raise ValidationError("Last otp code is now active. plz wait...")
-    cache.set(cache_key, code, 60*2)
+    cache.set(cache_key, str(code), 60*2)
     print(f"OTP code is: {code}")
     # TODO *** sending otp code with celery task ***
 
@@ -45,9 +45,9 @@ def check_OTP_code(phone_number, code):
     cache_key = phone_number + settings.CACHE_OTP_KEY
     valid_otp_code = cache.get(cache_key)
     if not valid_otp_code:
-        # TODO only warning to IP or use give_warning_to_user function?
-        raise "otp code not find"
+        give_warning_to_user(phone_number)
+        raise ValidationError("otp code not find")
     if valid_otp_code != code:
         give_warning_to_user(phone_number)
-        raise "invalid otp code"
-        
+        raise ValidationError("invalid otp code")
+    cache.delete(cache_key)

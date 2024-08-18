@@ -47,14 +47,12 @@ class TestCheckPhoneNumber(APITestCase):
 
         response = self.client.get(self.url, data={"phone_number": self.phone_number})
         response_data = response.json()
-        print(response_data)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response_data, "Send password")
 
     def test_ok_user_not_exists(self):
         response = self.client.get(self.url, data={"phone_number": self.phone_number})
         response_data = response.json()
-        print(response_data)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response_data, "Send OTP Code")
         self.assertIsNotNone(cache.get(self.user_otp_cache_key))

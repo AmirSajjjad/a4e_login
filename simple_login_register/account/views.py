@@ -57,7 +57,7 @@ class CheckOTPView(APIView):
         check_OTP_code(phone_number, code)
 
         # Using get_or_create for create a new user or generate token for an existing user to reset password or ...
-        user = User.objects.get_or_create(phone_number=phone_number)
+        user, _ = User.objects.get_or_create(phone_number=phone_number)
         return Response(get_tokens_for_user(user))
 
 
