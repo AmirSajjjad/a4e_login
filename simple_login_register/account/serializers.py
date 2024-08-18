@@ -25,9 +25,11 @@ class UpdateProfileSerializer(serializers.ModelSerializer):
             "last_name",
             "email",
         ]
+        extra_kwargs = {'password': {'required': False, "write_only": True}}
     
     def update(self, instance, validated_data):
         password = validated_data.pop("password", None)
         if password:
             instance.set_password(password)
+            instance.save()
         return super().update(instance, validated_data)
