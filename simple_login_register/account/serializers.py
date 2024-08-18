@@ -12,13 +12,8 @@ class CheckPhoneNumberRequestSerializer(serializers.Serializer):
 
     def validate(self, attrs):
         if check_user_is_limited(attrs["phone_number"]):
-            raise serializers.ValidationError("User Is Limited")
+            raise serializers.ValidationError({"phone_number": "User Is Limited"})
         return attrs
-
-
-class TokenSerializer(serializers.Serializer):
-    access = serializers.CharField()
-    refresh = serializers.CharField()    
 
 
 class UpdateProfileSerializer(serializers.ModelSerializer):
