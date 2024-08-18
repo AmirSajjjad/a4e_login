@@ -5,7 +5,6 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /app
 
-
 COPY requirements.txt /app/
 RUN pip install --upgrade pip \
     && pip install -r requirements.txt
@@ -13,9 +12,6 @@ RUN pip install --upgrade pip \
 
 COPY . /app/
 
-CMD python3 manage.py makemigrations --no-input && \
-    python3 manage.py migrate --no-input && \
-    python3 manage.py createsuperuser --user admin --email admin@localhost --no-input; \
-    python3 manage.py runserver 0.0.0.0:8000 --no-input
-    # python3 manage.py collectstatic --no-input && \
-    # gunicorn -b 0.0.0.0:8000 cashmanager.wsgi
+CMD python3 simple_login_register/manage.py makemigrations --no-input && \
+    python3 simple_login_register/manage.py migrate --no-input && \
+    python3 simple_login_register/manage.py runserver 0.0.0.0:8000

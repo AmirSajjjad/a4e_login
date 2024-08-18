@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "0.0.0.0"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -83,7 +83,6 @@ SIMPLE_JWT = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
         "LOCATION": os.environ.get('REDIS_PATH', "redis://127.0.0.1:6379/1"),
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient"
@@ -164,3 +163,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_PROFILE_MODULE = 'account.User'
+AUTH_USER_MODEL = 'account.User'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = "phone_number"
+
+MAX_USER_WARNING_COUNT = 3
+USER_LIMIT_TIME = 60
+CACHE_WARNING_KEY = "-warning_count"
+CACHE_OTP_KEY = "-OTP"
